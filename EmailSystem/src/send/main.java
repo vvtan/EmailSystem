@@ -11,10 +11,10 @@ public class main {
       mailInfo.setMailServerHost("smtp.163.com");   
       mailInfo.setMailServerPort("25");   
       mailInfo.setValidate(true);   
-      mailInfo.setUserName("15078333563@163.com");   
-      mailInfo.setPassword("y17623M");//您的邮箱密码   
-      mailInfo.setFromAddress("15078333563@163.com");   
-      mailInfo.setToAddress("987047845@qq.com"); 
+      mailInfo.setUserName("XXXX");   
+      mailInfo.setPassword("XXXX");//您的邮箱密码   
+      mailInfo.setFromAddress("XXXXX");   
+      mailInfo.setToAddress("XXXXX"); 
       mailInfo.setSubject("Test2");   
       mailInfo.setContent("This is a test E-mail");   
         //这个类主要来发送邮件  
