@@ -99,5 +99,5 @@
         }  
         public void setContent(String textContent) {   
           this.content = textContent;   
-        }   
+        }  
     }   
