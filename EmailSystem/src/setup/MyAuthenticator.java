@@ -2,7 +2,7 @@ package setup;
   
 import javax.mail.*;  
   /** 
-     ÃÜÂëÑéÖ¤Æ÷ 
+    å¯†ç éªŒè¯å™¨ 
   */  
 public class MyAuthenticator extends Authenticator{  
     String userName=null;  

@@ -15,15 +15,15 @@ import setup.SimpleMailSender;
 
 public class main extends JFrame implements ActionListener{
 	
-	private JLabel slable=new JLabel("·¢ĞÅÈË");
-	private JLabel rlable=new JLabel("ÊÕĞÅÈË");
-	private JLabel tilable=new JLabel("±êÌâ");
-	private JLabel colable =new JLabel("ÄÚÈİ");
+	private JLabel slable=new JLabel("å‘ä¿¡äºº");
+	private JLabel rlable=new JLabel("æ”¶ä¿¡äºº");
+	private JLabel tilable=new JLabel("æ ‡é¢˜");
+	private JLabel colable =new JLabel("å†…å®¹");
 	static private JTextField sendName=new JTextField(60);
 	static private JTextField receiveName=new JTextField(60);
 	static private JTextField title=new JTextField(60);
 	static private JTextField content=new JTextField(60);
-	static private JButton send=new JButton("·¢ËÍ");
+	static private JButton send=new JButton("å‘é€");
 	
 	MailSenderInfo mailInfo = new MailSenderInfo();
 	 
@@ -54,7 +54,7 @@ public class main extends JFrame implements ActionListener{
 		}
 	}
 	public static void sendmail(){
-		
+		//è¿™ä¸ªç±»ä¸»è¦æ˜¯è®¾ç½®é‚®ä»¶  
 		MailSenderInfo mailInfo = new MailSenderInfo();
 		String sName,rName,tl,cont;
 		sName=sendName.getText().trim();
@@ -66,19 +66,19 @@ public class main extends JFrame implements ActionListener{
 	    mailInfo.setMailServerHost("smtp.163.com");   
 	    mailInfo.setMailServerPort("25");   
 	    mailInfo.setValidate(true);   
-	    mailInfo.setUserName("XXXXX");  //·¢ĞÅÈËÓÊÏä 
-	    mailInfo.setPassword("XXXXX");//ÄúµÄÓÊÏäÃÜÂë   
+	    mailInfo.setUserName("XXXXX");  //å·²æ³¨å†Œçš„é‚®ç®±ï¼Œä¾‹å¦‚QQæˆ–163é‚®ç®±
+	    mailInfo.setPassword("XXXXX");//é‚®ç®±å¯†ç    
 	    mailInfo.setFromAddress(sName);   
 	    mailInfo.setToAddress(rName); 
 	    mailInfo.setSubject(tl);   
 	    mailInfo.setContent(cont);   
-	        //Õâ¸öÀàÖ÷ÒªÀ´·¢ËÍÓÊ¼ş  
+	    	//è¿™ä¸ªç±»ä¸»è¦æ¥å‘é€é‚®ä»¶ 
 	    SimpleMailSender sms = new SimpleMailSender();  
-	    sms.sendTextMail(mailInfo);//·¢ËÍÎÄÌå¸ñÊ½   
-	    sms.sendHtmlMail(mailInfo);//·¢ËÍhtml¸ñÊ½ 
+	    sms.sendTextMail(mailInfo);//å‘é€æ–‡ä½“æ ¼å¼
+	    sms.sendHtmlMail(mailInfo);//å‘é€htmlæ ¼å¼ 
 	}
     public static void main(String[] args){  
-        //Õâ¸öÀàÖ÷ÒªÊÇÉèÖÃÓÊ¼ş  
+      
       new main();
     }  
 }

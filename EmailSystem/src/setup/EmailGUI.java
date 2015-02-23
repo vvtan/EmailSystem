@@ -19,7 +19,7 @@ public class EmailGUI extends JFrame implements ActionListener{
 	private JTextField sendName=new JTextField(60);
 	private JTextField receiveName=new JTextField(60);
 	private JTextField content=new JTextField(60);
-	private JButton send=new JButton("∑¢ÀÕ");
+	private JButton send=new JButton("ÂèëÈÄÅ");
 	
 	MailSenderInfo mailInfo = new MailSenderInfo();
 	 
@@ -43,7 +43,6 @@ public class EmailGUI extends JFrame implements ActionListener{
 			sName=sendName.getText().trim();
 			rName=receiveName.getText().trim();
 			cont=content.getText().trim();
-			System.out.println(sName+" "+rName+" "+cont);
 		}
 	}
 }

@@ -1,37 +1,37 @@
     package setup;  
     /**  
-    * ·¢ËÍÓÊ¼şĞèÒªÊ¹ÓÃµÄ»ù±¾ĞÅÏ¢  
+    * å‘é€é‚®ä»¶éœ€è¦ä½¿ç”¨çš„åŸºæœ¬ä¿¡æ¯ 
     */   
     import java.util.Properties;   
     public class MailSenderInfo {   
           
-        // ·¢ËÍÓÊ¼şµÄ·şÎñÆ÷µÄIPºÍ¶Ë¿Ú   
+        // å‘é€é‚®ä»¶çš„æœåŠ¡å™¨çš„IPå’Œç«¯å£
         private String mailServerHost;   
         private String mailServerPort = "25";   
           
-        // ÓÊ¼ş·¢ËÍÕßµÄµØÖ·   
+        // é‚®ä»¶å‘é€è€…çš„åœ°å€   
         private String fromAddress;   
           
-        // ÓÊ¼ş½ÓÊÕÕßµÄµØÖ·   
+        // é‚®ä»¶æ¥æ”¶è€…çš„åœ°å€    
         private String toAddress;   
           
-        // µÇÂ½ÓÊ¼ş·¢ËÍ·şÎñÆ÷µÄÓÃ»§ÃûºÍÃÜÂë   
+        // ç™»é™†é‚®ä»¶å‘é€æœåŠ¡å™¨çš„ç”¨æˆ·åå’Œå¯†ç  
         private String userName;   
         private String password;   
           
-        // ÊÇ·ñĞèÒªÉí·İÑéÖ¤   
+        // æ˜¯å¦éœ€è¦èº«ä»½éªŒè¯   
         private boolean validate = false;   
           
-        // ÓÊ¼şÖ÷Ìâ   
+        // é‚®ä»¶ä¸»é¢˜
         private String subject;   
           
-        // ÓÊ¼şµÄÎÄ±¾ÄÚÈİ   
+        // é‚®ä»¶å†…å®¹ 
         private String content;   
           
-        // ÓÊ¼ş¸½¼şµÄÎÄ¼şÃû   
+        // é‚®ä»¶é™„ä»¶çš„æ–‡ä»¶å  
         private String[] attachFileNames;     
         /**  
-          * »ñµÃÓÊ¼ş»á»°ÊôĞÔ  
+          * è·å¾—é‚®ä»¶ä¼šè¯å±æ€§ 
           */   
         public Properties getProperties(){   
           Properties p = new Properties();   
