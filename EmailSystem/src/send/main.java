@@ -9,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import setup.EmailGUI;
 import setup.MailSenderInfo;
 import setup.SimpleMailSender;
 
@@ -63,19 +62,20 @@ public class main extends JFrame implements ActionListener{
 		tl=title.getText().trim();
 		System.out.println(sName+" "+rName+" "+tl+" "+cont);	
 		   
-	    mailInfo.setMailServerHost("smtp.163.com");   
-	    mailInfo.setMailServerPort("25");   
+	    mailInfo.setMailServerHost("smtp.sina.com.cn"); //不同邮箱的服务器不同 
+	    mailInfo.setMailServerPort("25");   //端口号
 	    mailInfo.setValidate(true);   
-	    mailInfo.setUserName("XXXXX");  //已注册的邮箱，例如QQ或163邮箱
-	    mailInfo.setPassword("XXXXX");//邮箱密码   
+	    mailInfo.setUserName("test605592311@sina.com");  //已注册的邮箱，例如QQ或163邮箱
+	    mailInfo.setPassword("test123");//邮箱密码   
 	    mailInfo.setFromAddress(sName);   
 	    mailInfo.setToAddress(rName); 
 	    mailInfo.setSubject(tl);   
 	    mailInfo.setContent(cont);   
 	    	//这个类主要来发送邮件 
 	    SimpleMailSender sms = new SimpleMailSender();  
+	    //此处只要选择一种发送形式即可
 	    sms.sendTextMail(mailInfo);//发送文体格式
-	    sms.sendHtmlMail(mailInfo);//发送html格式 
+	   // sms.sendHtmlMail(mailInfo);//发送html格式 
 	}
     public static void main(String[] args){  
       
