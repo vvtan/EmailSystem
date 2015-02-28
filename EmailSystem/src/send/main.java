@@ -3,28 +3,42 @@ package send;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Properties;
 
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Session;
+import javax.mail.Store;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import receive.SimpleStoreMails;
 import setup.MailSenderInfo;
 import setup.SimpleMailSender;
 
 public class main extends JFrame implements ActionListener{
 	
+	static MailSenderInfo mailInfo = new MailSenderInfo();
+	SimpleStoreMails ssm=new SimpleStoreMails();
+	static String sn=mailInfo.getUserName();
+	
 	private JLabel slable=new JLabel("发信人");
 	private JLabel rlable=new JLabel("收信人");
 	private JLabel tilable=new JLabel("标题");
 	private JLabel colable =new JLabel("内容");
-	static private JTextField sendName=new JTextField(60);
+	static private JTextField sendName=new JTextField(sn);
 	static private JTextField receiveName=new JTextField(60);
 	static private JTextField title=new JTextField(60);
 	static private JTextField content=new JTextField(60);
 	static private JButton send=new JButton("发送");
-	
-	MailSenderInfo mailInfo = new MailSenderInfo();
+	static private JButton recive=new JButton("接收");
 	 
 	public main() {
 		// TODO Auto-generated constructor stub
@@ -39,8 +53,11 @@ public class main extends JFrame implements ActionListener{
 		add(colable);
 		add(content);
 		add(send);
+		add(recive);
 		
 		send.addActionListener(this);
+		recive.addActionListener(this);
+		
 		pack();
 		setVisible(true);
 	}
@@ -51,23 +68,30 @@ public class main extends JFrame implements ActionListener{
 			
 			sendmail();
 		}
+		if(e.getSource()==recive){
+			try {
+				ssm.receiveEmail();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
+	
 	public static void sendmail(){
 		//这个类主要是设置邮件  
 		MailSenderInfo mailInfo = new MailSenderInfo();
 		String sName,rName,tl,cont;
-		sName=sendName.getText().trim();
+		sName=mailInfo.getUserName();
 		rName=receiveName.getText().trim();
 		cont=content.getText().trim();
 		tl=title.getText().trim();
-		System.out.println(sName+" "+rName+" "+tl+" "+cont);	
+		System.out.println(rName+" "+tl+" "+cont);	
 		   
 	    mailInfo.setMailServerHost("smtp.sina.com.cn"); //不同邮箱的服务器不同 
 	    mailInfo.setMailServerPort("25");   //端口号
 	    mailInfo.setValidate(true);   
-	    mailInfo.setUserName("test605592311@sina.com");  //已注册的邮箱，例如QQ或163邮箱
-	    mailInfo.setPassword("test123");//邮箱密码   
-	    mailInfo.setFromAddress(sName);   
+	    mailInfo.setFromAddress(mailInfo.getUserName());   
 	    mailInfo.setToAddress(rName); 
 	    mailInfo.setSubject(tl);   
 	    mailInfo.setContent(cont);   
@@ -77,6 +101,7 @@ public class main extends JFrame implements ActionListener{
 	    sms.sendTextMail(mailInfo);//发送文体格式
 	   // sms.sendHtmlMail(mailInfo);//发送html格式 
 	}
+	
     public static void main(String[] args){  
       
       new main();

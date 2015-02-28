@@ -16,8 +16,8 @@
         private String toAddress;   
           
         // 登陆邮件发送服务器的用户名和密码 
-        private String userName;   
-        private String password;   
+        private static String userName="test605592311@sina.com";   
+        private static String password="test123";  
           
         // 是否需要身份验证   
         private boolean validate = false;   

@@ -8,18 +8,22 @@ import javax.mail.Folder;
 import javax.mail.Message;  
 import javax.mail.Session;  
 import javax.mail.Store;  
+
+import setup.MailSenderInfo;
  
 /**  
  * 简单的邮件接收程序，打印出邮件的原始内容  
  * 
  */ 
 public class SimpleStoreMails {  
-    public static void main(String[] args) throws Exception {  
+    public void receiveEmail() throws Exception {  
         // 连接pop3服务器的主机名、协议、用户名、密码  
+    	MailSenderInfo mailInfo = new MailSenderInfo();
         String pop3Server = "pop.sina.com"; //需要邮箱内设置开启POP3/SMTP服务 
         String protocol = "pop3";  
-        String user = "test605592311@sina.com";  
-        String pwd = "test123";  
+        String user =mailInfo.getUserName();  
+        String pwd = mailInfo.getPassword(); 
+        System.out.println(mailInfo.getUserName()+mailInfo.getPassword());
           
         // 创建一个有具体连接信息的Properties对象  
         Properties props = new Properties();  
