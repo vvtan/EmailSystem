@@ -15,11 +15,12 @@ import javax.mail.NoSuchProviderException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import receive.SimpleStoreMails;
+import analysis.SimpleStoreMails;
 import setup.MailSenderInfo;
 import setup.SimpleMailSender;
 
@@ -39,6 +40,7 @@ public class main extends JFrame implements ActionListener{
 	static private JTextField content=new JTextField(60);
 	static private JButton send=new JButton("发送");
 	static private JButton recive=new JButton("接收");
+	static private JButton look=new JButton("附件");
 	 
 	public main() {
 		// TODO Auto-generated constructor stub
@@ -54,9 +56,12 @@ public class main extends JFrame implements ActionListener{
 		add(content);
 		add(send);
 		add(recive);
+		add(look);
+		
 		
 		send.addActionListener(this);
 		recive.addActionListener(this);
+		look.addActionListener(this);
 		
 		pack();
 		setVisible(true);
@@ -76,12 +81,25 @@ public class main extends JFrame implements ActionListener{
 				e1.printStackTrace();
 			}
 		}
+		if(e.getSource()==look){
+			
+			JFileChooser choose = new JFileChooser();
+			//弹出选择框
+			int returnVal = choose.showOpenDialog(null);
+			// 如果是选择了文件
+			if(JFileChooser.APPROVE_OPTION == returnVal){
+			       //打印出文件的路径
+				String filename=String.valueOf(choose.getSelectedFile());
+				mailInfo.setAttachFileNames(filename);
+				System.out.println(mailInfo.getAttachFileNames());
+			}
+		}
 	}
 	
 	public static void sendmail(){
 		//这个类主要是设置邮件  
-		MailSenderInfo mailInfo = new MailSenderInfo();
-		String sName,rName,tl,cont;
+		
+		String sName,rName,tl,cont,dir;
 		sName=mailInfo.getUserName();
 		rName=receiveName.getText().trim();
 		cont=content.getText().trim();
@@ -94,7 +112,7 @@ public class main extends JFrame implements ActionListener{
 	    mailInfo.setFromAddress(mailInfo.getUserName());   
 	    mailInfo.setToAddress(rName); 
 	    mailInfo.setSubject(tl);   
-	    mailInfo.setContent(cont);   
+	    mailInfo.setContent(cont); 
 	    	//这个类主要来发送邮件 
 	    SimpleMailSender sms = new SimpleMailSender();  
 	    //此处只要选择一种发送形式即可
