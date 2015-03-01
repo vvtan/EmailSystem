@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
 import javax.mail.Folder;
@@ -71,7 +72,12 @@ public class main extends JFrame implements ActionListener{
 		// TODO Auto-generated method stub
 		if(e.getSource()==send){
 			
-			sendmail();
+			try {
+				sendmail();
+			} catch (UnsupportedEncodingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		if(e.getSource()==recive){
 			try {
@@ -96,7 +102,7 @@ public class main extends JFrame implements ActionListener{
 		}
 	}
 	
-	public static void sendmail(){
+	public static void sendmail() throws UnsupportedEncodingException{
 		//这个类主要是设置邮件  
 		
 		String sName,rName,tl,cont,dir;

@@ -1,4 +1,5 @@
 package setup;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;   
 import java.util.Properties;  
 
@@ -16,13 +17,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;   
 import javax.mail.internet.MimeMessage;   
 import javax.mail.internet.MimeMultipart;   
+import javax.mail.internet.MimeUtility;
   
 public class SimpleMailSender  {   
 /**  
   * 以文本格式发送邮件  
   * @param mailInfo 待发送的邮件的信息 
+ * @throws UnsupportedEncodingException 
   */   
-    public boolean sendTextMail(MailSenderInfo mailInfo) {   
+    public boolean sendTextMail(MailSenderInfo mailInfo) throws UnsupportedEncodingException {   
       // 判断是否需要身份认证 ֤   
       MyAuthenticator authenticator = null;   
       Properties pro = mailInfo.getProperties(); 
@@ -65,7 +68,7 @@ public class SimpleMailSender  {
       
       DataSource source=new FileDataSource(filename);//建立一个带附件的数据源
       messageBodyPart.setDataHandler(new DataHandler(source));
-      messageBodyPart.setFileName(filename);
+      messageBodyPart.setFileName(MimeUtility.encodeText(filename));
       
     //将邮件内容和附件加入到容器中作为发送的邮件
       multipart.addBodyPart(messageBodyPart);

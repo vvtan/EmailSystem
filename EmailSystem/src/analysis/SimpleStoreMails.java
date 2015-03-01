@@ -50,45 +50,47 @@ public class SimpleStoreMails {
 			Folder folder = store.getDefaultFolder();// 默认父目录
 
 			Folder popFolder = folder.getFolder("INBOX");// 获取收件箱
-			popFolder.open(Folder.READ_ONLY);// 可读邮件
+			popFolder.open(Folder.READ_ONLY);// 只读模式
 			// 列出来收件箱 下所有邮件
 			Message[] messages = popFolder.getMessages();
 			// 取出来邮件数
 			int msgCount = popFolder.getMessageCount();
 
 			for (int i = 0; i < msgCount; i++) {
+				
 				Message msg = messages[i];// 单个邮件
 				// 发件人信息
 				Address[] froms = msg.getFrom();
 				if (froms != null) {
 					System.out.println("发件人信息:" + froms[0]);
-					InternetAddress addr = (InternetAddress) froms[0];
-					System.out.println("发件人地址:" + addr.getAddress());
+//					InternetAddress addr = (InternetAddress) froms[0];
 				}
 
 				System.out.println("邮件主题:" + msg.getSubject()); 
-	          //messages[i].writeTo(System.out); //输出邮件内容包含邮件头 
-	            System.out.println(("邮件内容："+messages[i].getContent()));
-				// getContent() 是获取包裹内容, Part 相当于外包装
+//	            messages[i].writeTo(System.out); //输出邮件内容包含邮件头 	            
 	            
 				Object obj = msg.getContent();
+				
 				if (!(obj instanceof Multipart)) {
-
-				} else {
+					
+					System.out.println(("邮件正文为："+messages[i].getContent()));
+				} 
+				else {
+					
 					Multipart multipart = (Multipart) msg.getContent();
-					// 获取邮件的内容, 就一个大包裹, MultiPart包含所有邮件内容(正文+附件)
+					// MultiPart包含所有邮件内容(正文+附件)
 					System.out.println("邮件共有" 
 					+ multipart.getCount() + "部分组成");
 
 					// 依次处理各个部分
 					for (int j = 0, n = multipart.getCount(); j < n; j++) {
-
+					
 						Part part = multipart.getBodyPart(j);/*
 						 * 解包, 取出MultiPart的各个部分, 每部分可能是邮件内容,
 						 * 也可能是另一个小包裹(MultipPart)判断此包裹内容是不是一个小包裹,
 						 *  一般这一部分是 正文Content-Type: multipart/alternative
 						 */
-
+						
 						if (part.getContent() instanceof Multipart) {
 							// 转成小包裹
 							Multipart p = (Multipart) part.getContent();
@@ -120,6 +122,9 @@ public class SimpleStoreMails {
 							}
 							in.close();
 							out.close();
+						}
+						else{
+							System.out.println(("邮件正文为："+multipart.getBodyPart(0).getContent()));
 						}
 					}
 				}
