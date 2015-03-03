@@ -1,6 +1,11 @@
 package setup;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;   
 import java.util.Properties;  
+
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.Address;   
 import javax.mail.BodyPart;   
 import javax.mail.Message;   
@@ -12,16 +17,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;   
 import javax.mail.internet.MimeMessage;   
 import javax.mail.internet.MimeMultipart;   
+import javax.mail.internet.MimeUtility;
   
-/**  
-* 简单邮件（不带附件的邮件）发送器  
-*/   
 public class SimpleMailSender  {   
 /**  
   * 以文本格式发送邮件  
   * @param mailInfo 待发送的邮件的信息 
+ * @throws UnsupportedEncodingException 
   */   
-    public boolean sendTextMail(MailSenderInfo mailInfo) {   
+    public boolean sendTextMail(MailSenderInfo mailInfo) throws UnsupportedEncodingException {   
       // 判断是否需要身份认证 ֤   
       MyAuthenticator authenticator = null;   
       Properties pro = mailInfo.getProperties(); 
@@ -49,7 +53,27 @@ public class SimpleMailSender  {
       mailMessage.setSentDate(new Date());   
       // 设置邮件消息的主要内容   
       String mailContent = mailInfo.getContent();   
-      mailMessage.setText(mailContent);   
+     
+      //设置附件
+      BodyPart messageBodyPart=new MimeBodyPart();
+      messageBodyPart.setText(mailContent);//邮件体内容
+      
+      Multipart multipart=new MimeMultipart();//定义一个存储邮件内容和附件的容器
+      multipart.addBodyPart(messageBodyPart);
+      
+      messageBodyPart=new MimeBodyPart();
+      
+      String filename=mailInfo.getAttachFileNames();
+
+      
+      DataSource source=new FileDataSource(filename);//建立一个带附件的数据源
+      messageBodyPart.setDataHandler(new DataHandler(source));
+      messageBodyPart.setFileName(MimeUtility.encodeText(filename));
+      
+    //将邮件内容和附件加入到容器中作为发送的邮件
+      multipart.addBodyPart(messageBodyPart);
+      mailMessage.setContent(multipart);
+     
       // 发送邮件   
       Transport.send(mailMessage);
       return true;   
