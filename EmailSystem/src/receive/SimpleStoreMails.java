@@ -9,34 +9,21 @@ import javax.mail.Message;
 import javax.mail.Session;  
 import javax.mail.Store;  
 
-<<<<<<< HEAD
 import configure.AuthenticatorFactory;
 import configure.PropertyFactory;
 import setup.MyAuthenticator;
-=======
-import setup.MailSenderInfo;
->>>>>>> origin/master
  
 /**  
  * 简单的邮件接收程序，打印出邮件的原始内容  
  * 
  */ 
 public class SimpleStoreMails {  
-    public void receiveEmail() throws Exception {  
+    public static void main(String[] args) throws Exception {  
         // 连接pop3服务器的主机名、协议、用户名、密码  
-<<<<<<< HEAD
         String pop3Server = "pop3.163.com"; //需要邮箱内设置开启POP3/SMTP服务 
         String protocol = "pop3";  
         String user = "m13878383520";  
         String pwd = "W199422wyzzjxz";  
-=======
-    	MailSenderInfo mailInfo = new MailSenderInfo();
-        String pop3Server = "pop.sina.com"; //需要邮箱内设置开启POP3/SMTP服务 
-        String protocol = "pop3";  
-        String user =mailInfo.getUserName();  
-        String pwd = mailInfo.getPassword(); 
-        System.out.println(mailInfo.getUserName()+mailInfo.getPassword());
->>>>>>> origin/master
           
 
           
