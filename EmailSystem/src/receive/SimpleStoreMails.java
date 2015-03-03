@@ -3,11 +3,15 @@ package receive;
 import java.io.BufferedReader;  
 import java.io.InputStreamReader;  
 import java.util.Properties;  
- 
+
 import javax.mail.Folder;  
 import javax.mail.Message;  
 import javax.mail.Session;  
 import javax.mail.Store;  
+
+import configure.AuthenticatorFactory;
+import configure.PropertyFactory;
+import setup.MyAuthenticator;
  
 /**  
  * 简单的邮件接收程序，打印出邮件的原始内容  
@@ -16,23 +20,20 @@ import javax.mail.Store;
 public class SimpleStoreMails {  
     public static void main(String[] args) throws Exception {  
         // 连接pop3服务器的主机名、协议、用户名、密码  
-        String pop3Server = "pop.sina.com"; //需要邮箱内设置开启POP3/SMTP服务 
+        String pop3Server = "pop3.163.com"; //需要邮箱内设置开启POP3/SMTP服务 
         String protocol = "pop3";  
-        String user = "test605592311@sina.com";  
-        String pwd = "test123";  
+        String user = "m13878383520";  
+        String pwd = "W199422wyzzjxz";  
           
-        // 创建一个有具体连接信息的Properties对象  
-        Properties props = new Properties();  
-        props.setProperty("mail.store.protocol", protocol);  
-        props.setProperty("mail.pop3.host", pop3Server);  
+
           
         // 使用Properties对象获得Session对象  
-        Session session = Session.getInstance(props);  
+        Session session = Session.getInstance(new PropertyFactory().getProperties(protocol, pop3Server, "true"),new AuthenticatorFactory(user, pwd));  
         session.setDebug(false);  
           
         // 利用Session对象获得Store对象，并连接pop3服务器  
         Store store = session.getStore();  
-        store.connect(pop3Server, user, pwd);  
+        store.connect(); 
           
         // 获得邮箱内的邮件夹Folder对象，以"只读"打开  
         Folder folder = store.getFolder("inbox");  
